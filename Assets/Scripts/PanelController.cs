@@ -5,9 +5,18 @@ public class PanelController : MonoBehaviour
     public AudioSource audioSource;    // The audio source for this panel
     public AudioClip audioClip;        // The audio clip to play for this panel
     public GameObject nextPanel;       // The next panel to activate
+    public float delayBeforeAudio = 1f; // Delay (in seconds) before the audio starts
 
     void OnEnable()
     {
+        StartCoroutine(HandlePanelFlow());
+    }
+
+    private System.Collections.IEnumerator HandlePanelFlow()
+    {
+        // Wait for the specified delay before playing the audio
+        yield return new WaitForSeconds(delayBeforeAudio);
+
         PlayAudio();
     }
 
